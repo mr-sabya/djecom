@@ -1053,7 +1053,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .breadcrumb__wrapper .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
   color: #999;
-  content: var(--bs-breadcrumb-divider, "https://themepure.net/");
+  content: var(--bs-breadcrumb-divider, "");
 }
 
 .breadcrumb-two ul li {
@@ -3614,6 +3614,11 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .product__content .features-des ul li {
   display: block;
+}
+
+.features-des ul li {
+  margin-left: 20px;
+  list-style: disc !important;
 }
 
 .product__content .features-des ul li a {

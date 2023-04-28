@@ -91,12 +91,21 @@
                     <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
                         <div class="header-action">
                             <div class="block-userlink">
-                                <a class="icon-link" href="my-account.html">
+                                {% if user.is_authenticated %}
+                                <a class="icon-link" href="{% url 'my_account' %}">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                        <span class="sub">{{ user.username }} </span>
+                                        My Account </span>
+                                </a>
+                                {% else %}
+                                <a class="icon-link" href="{% url 'my_account' %}">
                                     <i class="flaticon-user"></i>
                                     <span class="text">
                                         <span class="sub">Login </span>
                                         My Account </span>
                                 </a>
+                                {% endif %}
                             </div>
                             <div class="block-wishlist action">
                                 <a class="icon-link" href="wishlist.html">

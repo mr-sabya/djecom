@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+{% load product_tags %}
 
 <main>
     <!-- slider-area-start -->
@@ -152,7 +153,7 @@
                             <div class="product__item swiper-slide">
                                 <div class="product__thumb fix">
                                     <div class="product-image w-img">
-                                        <a href="product-details.html">
+                                        <a href="{{ deal_product.get_absolute_url }}">
                                             <img src="/{{ deal_product.featured_image }}" alt="product">
                                         </a>
                                     </div>
@@ -176,7 +177,7 @@
                                     </div>
                                 </div>
                                 <div class="product__content">
-                                    <h6><a href="product-details.html">
+                                    <h6><a href="{{ deal_product.get_absolute_url }}">
                                             {{ deal_product.product_name|truncatechars:27 }}</a></h6>
                                     <div class="rating mb-5">
                                         <ul>
@@ -189,14 +190,14 @@
                                         <span>(01 review)</span>
                                     </div>
                                     <div class="price mb-10">
-                                        <span>৳{{ deal_product.price }}</span>
+                                        <span>৳{% call_sellprice deal_product.price deal_product.discount %} <span class="ml-3"><del>৳ {{ deal_product.price }}</del></span></span>
                                     </div>
                                     <div class="progress mb-5">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%"
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: {% progress_bar deal_product.total_quantity deal_product.availability %}%"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div class="progress-rate">
-                                        <span>Sold:312/1225</span>
+                                        <span>In Stock:&nbsp;&nbsp; {{ deal_product.availability }}/{{ deal_product.total_quantity }}</span>
                                     </div>
                                 </div>
                                 <div class="product__add-cart text-center">
@@ -2673,7 +2674,7 @@
                                     <div class="tab-content" id="modalTabContent">
 
                                         {% for deal_image in deal_product.product_image_set.all %}
-                                        <div class="tab-pane fade show {% if forloop.first %}active{% endif %}"
+                                        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
                                             id="nav_{{ deal_image.id }}" role="tabpanel">
                                             <div class="product__modal-img w-img">
                                                 <img src="/{{ deal_image.image }}" alt="" class="w-100">
